@@ -1,0 +1,27 @@
+# Build and Install directories
+build/
+install/
+
+# Log files
+log/
+.ros/
+
+# CMake related files
+*.cmake
+CMakeFiles/
+CMakeCache.txt
+
+# Python compiled files
+*.pyc
+__pycache__/
+
+# Editor/IDE specific files (examples)
+.vscode/
+.idea/
+*.swp
+*~
+
+# Other common temporary files
+*.bak
+*.tmp
+*.DS_Store

@@ -1,0 +1,8 @@
+<library path="hardware">
+  <class name="hardware/SimHardware" 
+         type="hardware::SimHardware" 
+         base_class_type="hardware_interface::SystemInterface"/>
+  <class name="hardware/RealHardware" 
+         type="hardware::RealHardware" 
+         base_class_type="hardware_interface::SystemInterface"/>
+</library>
