@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(arm)
+project(hardware)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -14,9 +14,9 @@ find_package(rclcpp_lifecycle REQUIRED)
 find_library(PIGPIO_LIBRARIES pigpio REQUIRED)
 
 add_library(hardware SHARED
-  src/hardware/real_hardware.cpp
-  src/hardware/sim_hardware.cpp
-  src/hardware/servo.cpp
+  src/real_hardware.cpp
+  src/sim_hardware.cpp
+  src/servo.cpp
 )
 
 target_include_directories(hardware PUBLIC
@@ -73,5 +73,5 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_targets(export_hardware HAS_LIBRARY_TARGET)
-ament_export_libraries(hardware HAS_LIBRARY_TARGET)
+ament_export_libraries(hardware)
 ament_package()
