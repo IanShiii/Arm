@@ -6,6 +6,13 @@ Planner::Planner() : rclcpp::Node("planner_node") {
         10,
         std::bind(&Planner::plan_and_execute_to_target, this, std::placeholders::_1)
     );
+    named_target_subscriber_ = this->create_subscription<std_msgs::msg::String>(
+        NAMED_TARGET_TOPIC,
+        10,
+        [this](const std_msgs::msg::String::SharedPtr msg) {
+            this->plan_and_execute_to_predefined_position(msg->data);
+        }
+    );
 }
 
 void Planner::initialize_move_group() {
@@ -45,6 +52,23 @@ bool Planner::plan_and_execute_to_target(interfaces::msg::Target target) {
     bool success = (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
 
     move_group_->clearPathConstraints();
+
+    if (success) {
+        RCLCPP_INFO(get_logger(), "Planning successful, executing plan.");
+        move_group_->execute(plan);
+    } else {
+        RCLCPP_WARN(get_logger(), "Planning failed.");
+    }
+
+    return success;
+}
+
+bool Planner::plan_and_execute_to_predefined_position(std::string position_name) {
+    RCLCPP_INFO(get_logger(), "Planning to predefined position: %s", position_name.c_str());
+    move_group_->setNamedTarget(position_name);
+
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
+    bool success = (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
 
     if (success) {
         RCLCPP_INFO(get_logger(), "Planning successful, executing plan.");
