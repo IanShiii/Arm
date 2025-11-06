@@ -10,7 +10,6 @@ import os
 def generate_launch_description():
     urdf_file = os.path.join(get_package_share_directory('robot_description'), 'urdf', 'arm.urdf.xacro')
     rviz_config_file = os.path.join(get_package_share_directory('arm_bringup'), 'config', 'rviz_config.rviz')
-    kinematics_config_file = os.path.join(get_package_share_directory('moveit2'), 'config', 'kinematics.yaml')
 
     robot_description = Command(['xacro ', urdf_file])
 
@@ -50,10 +49,6 @@ def generate_launch_description():
         name='planner_node',
         output='screen',
         parameters=[{
-            'arm.kinematics_solver': 'trac_ik_kinematics_plugin/TRAC_IKKinematicsPlugin',
-            'arm.position_only_ik': True,
-            'arm.solve_type': 'Speed',
-            'arm.kinematics_solver_timeout': 0.005,
             'use_sim_time': True
         }]
     )
@@ -84,7 +79,7 @@ def generate_launch_description():
         robot_state_publisher,
         ros2_controllers_launch,
         move_group_launch,
-        # delayed_planner_node,
+        delayed_planner_node,
         joy_node,
         rviz2
     ])
