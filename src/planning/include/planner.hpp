@@ -1,25 +1,28 @@
 #pragma once
 
-#include <rclcpp/rclcpp.hpp>
-#include <moveit/move_group_interface/move_group_interface.hpp>
-#include <moveit/planning_scene_interface/planning_scene_interface.hpp>
-#include <geometry_msgs/msg/pose_stamped.hpp>
-#include <geometry_msgs/msg/pose.hpp>
-#include <std_msgs/msg/string.hpp>
-#include <sensor_msgs/msg/joy.hpp>
-#include <moveit_msgs/msg/orientation_constraint.hpp>
-#include <moveit_msgs/msg/constraints.hpp>
-
 #include <string>
 #include <vector>
 #include <cmath>
 
-#include "interfaces/msg/target.hpp"
+#include <pluginlib/class_loader.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/pose.hpp>
+#include <std_msgs/msg/string.hpp>
+#include <sensor_msgs/msg/joy.hpp>
+
+// MoveIt
+#include <moveit/robot_model_loader/robot_model_loader.hpp>
+#include <moveit/planning_interface/planning_interface.hpp>
+#include <moveit/planning_scene/planning_scene.hpp>
+#include <moveit/kinematic_constraints/utils.hpp>
+#include <moveit_msgs/msg/display_trajectory.hpp>
+#include <moveit_msgs/msg/planning_scene.hpp>
+#include <moveit/move_group_interface/move_group_interface.hpp>
 
 #define JOY_TOPIC "/joy"
 
 #define PLANNING_GROUP_NAME "arm"
-#define PLANNING_FRAME_NAME "end_effector"
 
 std::map<int, std::string> button_to_position = {
     {0, "home"}, // X
@@ -45,7 +48,7 @@ class Planner : public rclcpp::Node {
         /**
          * @returns true if the planning and execution was successful, false otherwise.
          */
-        bool plan_and_execute_to_target(interfaces::msg::Target target);
+        bool plan_and_execute_to_target(geometry_msgs::msg::Pose target_pose);
 
         /**
          * @returns true if the planning and execution was successful, false otherwise.
@@ -53,7 +56,10 @@ class Planner : public rclcpp::Node {
         bool plan_and_execute_to_predefined_position(std::string position_name);
 
     private:
-        void joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg);
         rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joystick_subscriber_;
+
+        geometry_msgs::msg::Pose current_target_pose_;
         moveit::planning_interface::MoveGroupInterfacePtr move_group_;
+
+        void joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg);
 };

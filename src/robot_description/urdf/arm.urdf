@@ -4,11 +4,11 @@
 <robot name="arm">
   <!-- Link base -->
   <link name="base">
-    <inertial>
+    <!-- <inertial>
       <origin xyz="-6.13894e-07 0.00204244 0.0239598" rpy="0 0 0"/>
       <mass value="0.152298"/>
       <inertia ixx="0.000184411" ixy="3.74594e-10" ixz="-2.30351e-10" iyy="0.00016631" iyz="-6.88285e-06" izz="0.000267838"/>
-    </inertial>
+    </inertial> -->
     <!-- Part base -->
     <visual>
       <origin xyz="-1.17772e-08 3.67761e-08 0.028" rpy="1.5708 -0 -1.5708"/>
