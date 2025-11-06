@@ -1,8 +1,9 @@
 #pragma once
 
-#include <pigpio.h>
 #include <stdexcept>
 #include <cassert>
+#include <wiringPi.h>
+#include <softServo.h>
 
 namespace servo {
     class Servo {
@@ -20,6 +21,7 @@ namespace servo {
             Servo();
 
             void configure();
+            void deactivate();
             void write_position();
 
         private:

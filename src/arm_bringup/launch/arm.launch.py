@@ -47,6 +47,13 @@ def generate_launch_description():
         output='screen'
     )
 
+    joy_node = Node(
+        package='joy',
+        executable='joy_node',
+        name='joy_node',
+        output='screen'
+    )
+
     rviz2 = Node(
         package='rviz2',
         executable='rviz2',
@@ -59,6 +66,7 @@ def generate_launch_description():
         robot_state_publisher,
         ros2_controllers_launch,
         move_group_launch,
-        # planner_node,
+        planner_node,
+        joy_node,
         rviz2
     ])

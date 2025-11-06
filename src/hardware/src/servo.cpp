@@ -27,14 +27,18 @@ namespace servo {
     {}
 
     void Servo::configure() {
-        gpioSetMode(gpio_pin_, PI_OUTPUT);
+        pinMode(gpio_pin_, INPUT);
+    }
+
+    void Servo::deactivate() {
+        softServoWrite(gpio_pin_, 0); // Stop sending PWM signal
     }
 
     void Servo::write_position() {
         assert(target_angle_radians_ >= min_angle_radians_ && target_angle_radians_ <= max_angle_radians_);
         
         double pwm_width = position_to_pwm_width(target_angle_radians_);
-        gpioServo(gpio_pin_, static_cast<unsigned int>(pwm_width));
+        softServoWrite(gpio_pin_, static_cast<unsigned int>(pwm_width));
     }
 
     double Servo::position_to_pwm_width(double position) {

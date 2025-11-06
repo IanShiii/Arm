@@ -1,6 +1,14 @@
 #pragma once
 
-#include <pigpio.h>
+#include <wiringPi.h>
+
+#ifdef TRUE
+#undef TRUE
+#endif
+
+#ifdef FALSE
+#undef FALSE
+#endif
 
 #include "pluginlib/class_list_macros.hpp"
 #include "hardware_interface/system_interface.hpp"
@@ -28,11 +36,7 @@ namespace hardware {
             hardware_interface::return_type write([[maybe_unused]] const rclcpp::Time & time, [[maybe_unused]] const rclcpp::Duration & period) override;
 
         private:
-            servo::Servo servo_1_;
-            servo::Servo servo_2_;
-            servo::Servo servo_3_;
-            servo::Servo servo_4_;
-            servo::Servo servo_5_;
+            servo::Servo servos_[5];
     };
 
     class SimHardware : public hardware_interface::SystemInterface {

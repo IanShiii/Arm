@@ -1,17 +1,10 @@
 #include "planner.hpp"
 
 Planner::Planner() : rclcpp::Node("planner_node") {
-    target_subscriber_ = this->create_subscription<interfaces::msg::Target>(
-        TARGET_TOPIC,
+    joystick_subscriber_ = this->create_subscription<sensor_msgs::msg::Joy>(
+        JOY_TOPIC,
         10,
-        std::bind(&Planner::plan_and_execute_to_target, this, std::placeholders::_1)
-    );
-    named_target_subscriber_ = this->create_subscription<std_msgs::msg::String>(
-        NAMED_TARGET_TOPIC,
-        10,
-        [this](const std_msgs::msg::String::SharedPtr msg) {
-            this->plan_and_execute_to_predefined_position(msg->data);
-        }
+        std::bind(&Planner::joy_callback, this, std::placeholders::_1)
     );
 }
 
@@ -22,6 +15,16 @@ void Planner::initialize_move_group() {
     move_group_->setNumPlanningAttempts(5);
     move_group_->setMaxVelocityScalingFactor(0.8);
     move_group_->setMaxAccelerationScalingFactor(0.8);
+}
+
+void Planner::joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg) {
+    for (int i = 0; i < msg->buttons.size(); i++) {
+        if (msg->buttons[i] == 1) {
+            RCLCPP_INFO(get_logger(), "Joystick button %d pressed, moving to '%s' position.", i, button_to_position[i].c_str());
+            plan_and_execute_to_predefined_position(button_to_position[i]);
+            return;
+        }
+    }
 }
 
 bool Planner::plan_and_execute_to_target(interfaces::msg::Target target) {
