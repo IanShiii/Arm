@@ -1,2 +1,0 @@
-geometry_msgs/PoseStamped target_pose
-geometry_msgs/Pose tolerance
