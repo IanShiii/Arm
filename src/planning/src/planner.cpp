@@ -18,9 +18,9 @@ void Planner::initialize_move_group() {
 }
 
 void Planner::joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg) {
-    for (int i = 0; i < msg->buttons.size(); i++) {
+    for (size_t i = 0; i < msg->buttons.size(); i++) {
         if (msg->buttons[i] == 1) {
-            RCLCPP_INFO(get_logger(), "Joystick button %d pressed, moving to '%s' position.", i, button_to_position[i].c_str());
+            RCLCPP_INFO(get_logger(), "Joystick button %zu pressed, moving to '%s' position.", i, button_to_position[i].c_str());
             plan_and_execute_to_predefined_position(button_to_position[i]);
             return;
         }

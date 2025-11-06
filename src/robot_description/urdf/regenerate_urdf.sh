@@ -8,4 +8,4 @@ rm $URDF_FILEPATH
 
 onshape-to-robot "$SCRIPT_DIR/onshape_to_robot_config.json"
 
-sed -i 's|package://|package://hardware/urdf/|g' "$URDF_FILEPATH"
+sed -i 's|package://|package://robot_description/urdf/|g' "$URDF_FILEPATH"

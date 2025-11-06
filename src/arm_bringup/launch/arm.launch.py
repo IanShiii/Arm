@@ -8,7 +8,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 import os
 
 def generate_launch_description():
-    urdf_file = os.path.join(get_package_share_directory('hardware'), 'urdf', 'arm.urdf.xacro')
+    urdf_file = os.path.join(get_package_share_directory('robot_description'), 'urdf', 'arm.urdf.xacro')
     rviz_config_file = os.path.join(get_package_share_directory('arm_bringup'), 'config', 'rviz_config.rviz')
 
     robot_description = Command(['xacro ', urdf_file])
