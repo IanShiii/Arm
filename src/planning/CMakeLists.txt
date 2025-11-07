@@ -12,7 +12,6 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(interfaces REQUIRED)
 
 install (DIRECTORY include/
   DESTINATION share/${PROJECT_NAME}/include/
@@ -24,7 +23,6 @@ ament_target_dependencies(planner_node
   rclcpp
   moveit_ros_planning_interface
   geometry_msgs
-  interfaces
 )
 
 target_include_directories(planner_node PUBLIC
@@ -48,5 +46,5 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_export_dependencies(rclcpp moveit_ros_planning_interface geometry_msgs interfaces)
+ament_export_dependencies(rclcpp moveit_ros_planning_interface geometry_msgs)
 ament_package()

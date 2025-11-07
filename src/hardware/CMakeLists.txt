@@ -11,7 +11,6 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
-find_library(PIGPIO_LIBRARIES pigpio REQUIRED)
 
 add_library(hardware SHARED
   src/real_hardware.cpp

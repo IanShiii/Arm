@@ -15,7 +15,6 @@
   <depend>rclcpp</depend>
   <depend>moveit_ros_planning_interface</depend>
   <depend>geometry_msgs</depend>
-  <depend>interfaces</depend>
   <depend>trac_ik_kinematics_plugin</depend>
 
   <export>

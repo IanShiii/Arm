@@ -11,7 +11,6 @@
 
   <depend>hardware_interface</depend>
   <depend>rclcpp</depend>
-  <depend>pigpio</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp_lifecycle</depend>
 
