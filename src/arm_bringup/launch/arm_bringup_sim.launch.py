@@ -30,12 +30,12 @@ def generate_launch_description():
         )
     )
 
-    move_group_launch = IncludeLaunchDescription(
+    moveit_servo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
                 get_package_share_directory('moveit2'),
                 'launch',
-                'move_group.launch.py'
+                'moveit_servo.launch.py'
             )
         ),
         launch_arguments={
@@ -51,13 +51,6 @@ def generate_launch_description():
         parameters=[{
             'use_sim_time': True
         }]
-    )
-
-    delayed_planner_node = TimerAction(
-        period=3.0,  # seconds
-        actions=[
-            planner_node
-        ]
     )
 
     joy_node = Node(
@@ -78,8 +71,8 @@ def generate_launch_description():
     return LaunchDescription([
         robot_state_publisher,
         ros2_controllers_launch,
-        move_group_launch,
-        delayed_planner_node,
+        # moveit_servo_launch,
+        # planner_node,
         joy_node,
         rviz2
     ])
