@@ -57,10 +57,6 @@ namespace hardware {
             hardware_interface::return_type write([[maybe_unused]] const rclcpp::Time & time, [[maybe_unused]] const rclcpp::Duration & period) override;
 
         private:
-            servo::Servo servo_1_;
-            servo::Servo servo_2_;
-            servo::Servo servo_3_;
-            servo::Servo servo_4_;
-            servo::Servo servo_5_;
+            servo::Servo servos_[5];
     };
 };
