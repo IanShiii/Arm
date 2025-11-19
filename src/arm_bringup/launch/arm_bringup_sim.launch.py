@@ -8,7 +8,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 import os
 
 def generate_launch_description():
-    urdf_file = os.path.join(get_package_share_directory('robot_description'), 'urdf', 'arm.urdf.xacro')
+    urdf_file = os.path.join(get_package_share_directory('servoing'), 'config', 'arm.urdf.xacro')
     rviz_config_file = os.path.join(get_package_share_directory('arm_bringup'), 'config', 'rviz_config.rviz')
 
     robot_description = Command(['xacro ', urdf_file])
@@ -33,7 +33,7 @@ def generate_launch_description():
     moveit_servo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
-                get_package_share_directory('moveit2'),
+                get_package_share_directory('servoing'),
                 'launch',
                 'moveit_servo.launch.py'
             )
@@ -43,15 +43,15 @@ def generate_launch_description():
         }.items()
     )
 
-    planner_node = Node(
-        package='planning',
-        executable='planner_node',
-        name='planner_node',
-        output='screen',
-        parameters=[{
-            'use_sim_time': True
-        }]
-    )
+    # planner_node = Node(
+    #     package='planning',
+    #     executable='planner_node',
+    #     name='planner_node',
+    #     output='screen',
+    #     parameters=[{
+    #         'use_sim_time': True
+    #     }]
+    # )
 
     joy_node = Node(
         package='joy',
@@ -71,7 +71,7 @@ def generate_launch_description():
     return LaunchDescription([
         robot_state_publisher,
         ros2_controllers_launch,
-        # moveit_servo_launch,
+        moveit_servo_launch,
         # planner_node,
         joy_node,
         rviz2

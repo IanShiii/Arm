@@ -31,6 +31,10 @@ namespace hardware {
         for (size_t i = 0; i < 5; ++i) {
             state_interfaces.emplace_back(hardware_interface::StateInterface(
                 "joint_" + std::to_string(i + 1), hardware_interface::HW_IF_POSITION, &servos_[i].target_angle_radians_));
+            state_interfaces.emplace_back(hardware_interface::StateInterface(
+                "joint_" + std::to_string(i + 1), hardware_interface::HW_IF_VELOCITY, &FAKE_VELOCITY));
+            state_interfaces.emplace_back(hardware_interface::StateInterface(
+                "joint_" + std::to_string(i + 1), hardware_interface::HW_IF_EFFORT, &FAKE_EFFORT));
         }
         return state_interfaces;
     }

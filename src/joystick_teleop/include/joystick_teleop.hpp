@@ -17,23 +17,25 @@
 #include <moveit/planning_scene/planning_scene.hpp>
 #include <moveit/kinematic_constraints/utils.hpp>
 #include <moveit_msgs/msg/planning_scene.hpp>
-#include <moveit/move_group_interface/move_group_interface.hpp>
 #include <moveit_msgs/srv/servo_command_type.hpp>
 
 #define JOY_TOPIC "/joy"
-#define SERVO_POSE_TARGET_TOPIC "/servo_node/pose_target_cmds"
+#define SERVO_TWIST_TARGET_TOPIC "/servo_node/delta_twist_cmds"
 #define SERVO_SET_COMMAND_TYPE_SERVICE "/servo_node/switch_command_type"
 
-class Planner : public rclcpp::Node {
+#define DEADBAND (0.1)
+
+class JoystickTeleopNode : public rclcpp::Node {
     public:
-        Planner();
+        JoystickTeleopNode();
 
     private:
         rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joystick_subscriber_;
-        rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr servo_publisher_;
-        rclcpp::Client<moveit_msgs::srv::ServoCommandType>::SharedPtr switch_input_client;
+        rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr twist_publisher_;
+        rclcpp::Client<moveit_msgs::srv::ServoCommandType>::SharedPtr switch_input_client_;
 
-        geometry_msgs::msg::PoseStamped current_target_pose_;
+        moveit_msgs::srv::ServoCommandType::Request::SharedPtr current_command_type_;
 
         void joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg);
+        void set_servo_command_type(moveit_msgs::srv::ServoCommandType::Request::SharedPtr command_type);
 };

@@ -1,16 +1,12 @@
-import os
 import launch
 import launch_ros
-from ament_index_python.packages import get_package_share_directory
-from launch.conditions import IfCondition, UnlessCondition
-from launch.substitutions import LaunchConfiguration
 from launch_param_builder import ParameterBuilder
 from moveit_configs_utils import MoveItConfigsBuilder
 
 
 def generate_launch_description():
     moveit_config = (
-        MoveItConfigsBuilder(package_name="moveit2", robot_name="arm")
+        MoveItConfigsBuilder(package_name="servoing", robot_name="arm")
         .robot_description(file_path="config/arm.urdf.xacro")
         .robot_description_semantic(file_path="config/arm.srdf")
         .joint_limits(file_path="config/joint_limits.yaml")
@@ -20,7 +16,7 @@ def generate_launch_description():
 
     # Get parameters for the Servo node
     servo_params = {
-        "moveit_servo": ParameterBuilder(package_name="moveit2")
+        "moveit_servo": ParameterBuilder(package_name="servoing")
         .yaml("config/servo.yaml")
         .to_dict()
     }

@@ -37,6 +37,9 @@ namespace hardware {
 
         private:
             servo::Servo servos_[5];
+
+            double FAKE_VELOCITY = 0.0;
+            double FAKE_EFFORT = 0.0;
     };
 
     class SimHardware : public hardware_interface::SystemInterface {
@@ -58,5 +61,8 @@ namespace hardware {
 
         private:
             servo::Servo servos_[5];
+
+            double FAKE_VELOCITY = 0.0;
+            double FAKE_EFFORT = 0.0;
     };
 };

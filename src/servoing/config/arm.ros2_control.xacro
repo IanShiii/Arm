@@ -13,6 +13,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint_1']}</param>
                 </state_interface>
+                <state_interface name="velocity">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
                 <param name="pin">0</param>
                 <param name="min_pwm_width_microseconds">500</param>
                 <param name="max_pwm_width_microseconds">2500</param>
@@ -24,6 +30,12 @@
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint_2']}</param>
+                </state_interface>
+                <state_interface name="velocity">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0.0</param>
                 </state_interface>
                 <param name="pin">0</param>
                 <param name="min_pwm_width_microseconds">500</param>
@@ -37,6 +49,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint_3']}</param>
                 </state_interface>
+                <state_interface name="velocity">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
                 <param name="pin">0</param>
                 <param name="min_pwm_width_microseconds">500</param>
                 <param name="max_pwm_width_microseconds">2500</param>
@@ -49,6 +67,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint_4']}</param>
                 </state_interface>
+                <state_interface name="velocity">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
                 <param name="pin">0</param>
                 <param name="min_pwm_width_microseconds">500</param>
                 <param name="max_pwm_width_microseconds">2500</param>
@@ -60,6 +84,12 @@
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint_5']}</param>
+                </state_interface>
+                <state_interface name="velocity">
+                  <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0.0</param>
                 </state_interface>
                 <param name="pin">0</param>
                 <param name="min_pwm_width_microseconds">500</param>

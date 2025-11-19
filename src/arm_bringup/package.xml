@@ -13,8 +13,7 @@
   <test_depend>ament_lint_common</test_depend>
 
   <exec_depend>hardware</exec_depend>
-  <exec_depend>moveit2</exec_depend>
-  <exec_depend>planning</exec_depend>
+  <exec_depend>servoing</exec_depend>
   <exec_depend>rviz2</exec_depend>
 
   <export>
